@@ -22,6 +22,7 @@ namespace JWTGetToken.Services
             User user = new User();
             user.UserName = userDTO.UserName;
             user.PasswordHash = Hash512.ComputeHash512(userDTO.PasswordHash);
+            user.Role = userDTO.Role;
             await _dbContext.Users.AddAsync(user);
             var result = await _dbContext.SaveChangesAsync();
             return result > 0;

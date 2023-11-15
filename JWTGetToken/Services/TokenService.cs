@@ -14,9 +14,9 @@ namespace JWTGetToken.Services
             _configuration = configuration;
         }
 
-        public string GenerateToken(string username)
+        public string GenerateToken(string username, string role)
         {
-            // bu malumotlar
+            // bu ma'lumotlar
             var claims = new Claim[]
             {
                 // name 
@@ -25,10 +25,11 @@ namespace JWTGetToken.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 // vaqti
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-
+                // role
+                new Claim(ClaimTypes.Role, role)
             };
 
-            // qandedur algoritm boyicha shifrlanadi
+            // qandedur algoritm bo'yicha shifrlanadi
             var credentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"])),
                 SecurityAlgorithms.HmacSha256
