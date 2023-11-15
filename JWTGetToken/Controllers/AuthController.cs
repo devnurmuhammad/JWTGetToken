@@ -25,7 +25,7 @@ namespace JWTGetToken.Controllers
             var user = result.FirstOrDefault(x => x.UserName == loginRequest.Username && x.PasswordHash == Hash512.ComputeHash512(loginRequest.Password));
             if (user != null) 
             {
-                string token = tokenService.GenerateToken(loginRequest.Username);
+                string token = tokenService.GenerateToken(loginRequest.Username, user.Role);
                 return Ok(token);
             }
             return BadRequest();

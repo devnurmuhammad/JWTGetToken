@@ -15,6 +15,7 @@ namespace JWTGetToken.Controllers
         {
             _userService = userService;
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async ValueTask<IActionResult> CreateAsync(UserDTO userDTO)
         {
@@ -22,13 +23,12 @@ namespace JWTGetToken.Controllers
             return Ok("Created");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         [HttpGet]
-
         public async ValueTask<IActionResult> GetAllUser()
         {
             var result = await _userService.GetAllUsers();
             return Ok(result);
-        } 
+        }
     }
 }
