@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JWTGetToken.Controllers
 {
     [Route("api/[controller]/[action]")]
+
     [ApiController]
     public class UserController : ControllerBase
     {
